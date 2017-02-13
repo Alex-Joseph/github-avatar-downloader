@@ -9,12 +9,15 @@ function  getRepoContributors(repoOwner, repoName, cb) {
   var options = {url : requestURL, headers: {'User-Agent': "GitHub Avatar Downloader - Student Project"} };
   request.get(options, function(err, response, body) {
     if (err) throw err;
-    console.log("Response Status Code:", response.statusCode);
-    console.log(body);
+    cb(err, JSON.parse(body));
   });
 }
 // calls the function
-getRepoContributors("jquery", "jquery", function(err, result) {
+getRepoContributors("jquery", "jquery", function(err, results) {
   console.log("Errors:", err);
-  console.log("result:", result);
+  var avatars = [];
+  results.forEach(function(result) {
+    avatars.push(result.avatar_url);
+  })
+  console.log("result:", avatars);
 });
