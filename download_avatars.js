@@ -29,11 +29,12 @@ function  getRepoContributors(repoOwner, repoName, cb) {
 // function is defined before it is called by the .forEach loop with parameters url and filePath
 function downloadImageByURL(url, filePath) {
   request.get(url)
-  .on('error', function (err) {
-       throw err;
-     })
-     .pipe(fs.createWriteStream(filePath)); //filePath is defined in the function below
+    .on('error', function (err) {
+      throw err;
+    })
+    .pipe(fs.createWriteStream(filePath)); //filePath is defined in the function below
 };
+
 getRepoContributors(owner, repo, function(err, results) {
   console.log("Downloading..."); //just for aesthetics
   results.forEach(function(profile) {
@@ -45,5 +46,6 @@ getRepoContributors(owner, repo, function(err, results) {
     }
     downloadImageByURL(avatar_url, filePath);
   });
+  
   console.log("Download complete."); //just for aesthetics
 });
