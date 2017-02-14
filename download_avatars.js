@@ -10,7 +10,7 @@ function UserError(message) {
   console.log(message);
 }
 // conditional ensures that owner and repo are entered in CLI
-if (!owner && !repo) {
+if (!owner || !repo) {
   throw new UserError("Please enter an owner and a repo agrument");
 }
 
@@ -46,6 +46,6 @@ getRepoContributors(owner, repo, function(err, results) {
     }
     downloadImageByURL(avatar_url, filePath);
   });
-  
+
   console.log("Download complete."); //just for aesthetics
 });
